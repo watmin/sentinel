@@ -1,0 +1,9 @@
+examples/sentinel-test.pl
+lib/Net/Sentinel.pm
+lib/Net/Sentinel/Action.pm
+lib/Net/Sentinel/Action/Linux.pm
+lib/Net/Sentinel/Constants.pm
+lib/Net/Sentinel/Logger.pm
+lib/Net/Sentinel/Util.pm
+Makefile.PL
+MANIFEST			This list of files

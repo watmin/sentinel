@@ -1,0 +1,2 @@
+1.0.1 Thu Oct 08 10:53 CST 2015
+    - Added a handler for 'base-dir' to Net::Sentinel::new to correctly set the base-dir
