@@ -1252,6 +1252,8 @@ Net::Sentinel - Manages a given condition and actions to take when the condition
 
 =head1 SYNOPSIS
 
+=for pre
+
 sub some_condition {
     if ( 1 == 1 ) {
         return 1;
@@ -1278,6 +1280,8 @@ my $sentinel = Net::Sentinel->new(
 );
 
 $sentinel->start;
+
+=end
 
 =head1 DESCRIPTION
 
