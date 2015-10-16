@@ -1275,15 +1275,16 @@ actions to run should the condition return true.
 
  # The sentinel object that manages the condition and actions
  my $sentinel = Net::Sentinel->new(
-    'name'      => 'the-watcher',
-    'base-dir'  => '/var/sentinel/',
-    'condition' => \&some_condition,
-    'actions'   => [
-        Net::Sentinel::Action->new(
-            'name'  => 'the-action',
-            'spawn' => \&some_action,
-            'type'  => ACTION,
-    ],
+     'name'      => 'the-watcher',
+     'base-dir'  => '/var/sentinel/',
+     'condition' => \&some_condition,
+     'actions'   => [
+         Net::Sentinel::Action->new(
+             'name'  => 'the-action',
+             'spawn' => \&some_action,
+             'type'  => ACTION,
+         ),
+     ],
  );
 
  # Turn the sentinel on
