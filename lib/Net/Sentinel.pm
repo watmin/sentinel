@@ -1296,6 +1296,8 @@ executes all supplied actions when the condition is true
 
 =head1 METHODS
 
+=over
+
 =item new( %params ) (constructor)
 
 Creates a new Sentinel.
@@ -1433,6 +1435,8 @@ Returns: undef
 Gets the UNIX socket timeout
 
 Returns: C<timeout> (scalar)
+
+=back
 
 =cut
 
