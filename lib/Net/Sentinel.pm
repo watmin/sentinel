@@ -1252,13 +1252,13 @@ Net::Sentinel - Manages a given condition and actions to take when the condition
 
 =head1 SYNOPSIS
 
-The Net::Sentinel object requires a name describing it, a directory to operated from,
-a condition to execute to check if actions need to be ran and a list of actions to run
-should the condition return true.
+The Net::Sentinel object requires a name describing it, a directory to operated
+from, a condition to execute to check if actions need to be ran and a list of
+actions to run should the condition return true.
 
- # A sub to check every second. A return value of 1 indiciates the actions need to be ran. 
- # A return value of 0 indicates that the condition is not met. A log message is required
- # to be returned by the condition explaing the result
+ # A sub to check every second. A return value of 1 indiciates the actions need
+ # to be ran. A return value of 0 indicates that the condition is not met. A log
+ # message is required to be returned by the condition explaing the result
  sub some_condition {
     if ( 1 == 1 ) {
         return ( 1, "tripped" );
