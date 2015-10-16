@@ -1252,36 +1252,42 @@ Net::Sentinel - Manages a given condition and actions to take when the condition
 
 =head1 SYNOPSIS
 
-=for pre
+The Net::Sentinel object requires a name describing it, a directory to operated from,
+a condition to execute to check if actions need to be ran and a list of actions to run
+should the condition return true.
 
-sub some_condition {
+ # A sub to check every second. A return value of 1 indiciates the actions need to be ran. 
+ # A return value of 0 indicates that the condition is not met. A log message is required
+ # to be returned by the condition explaing the result
+ sub some_condition {
     if ( 1 == 1 ) {
-        return 1;
+        return ( 1, "tripped" );
     }
     else {
-        return;
+        return ( 0, "all good" );
     }
-}
+ }
 
-sub some_action {
+ # A sub to passed to Net::Sentinel::Action to be ran when the condtion is true
+ sub some_action {
     print "I was ran.\n";
-}
+ }
 
-my $sentinel = Net::Sentinel->new(
+ # The sentinel object that manages the condition and actions
+ my $sentinel = Net::Sentinel->new(
     'name'      => 'the-watcher',
     'base-dir'  => '/var/sentinel/',
-    'condition' => \&some_routine,
+    'condition' => \&some_condition,
     'actions'   => [
         Net::Sentinel::Action->new(
             'name'  => 'the-action',
             'spawn' => \&some_action,
             'type'  => ACTION,
     ],
-);
+ );
 
-$sentinel->start;
-
-=end
+ # Turn the sentinel on
+ $sentinel->start;
 
 =head1 DESCRIPTION
 
@@ -1290,7 +1296,7 @@ executes all supplied actions when the condition is true
 
 =head1 METHODS
 
-=head2 new( %params ) (constructor)
+=item new( %params ) (constructor)
 
 Creates a new Sentinel.
 
@@ -1299,130 +1305,130 @@ C<condition> (coderef), C<actions> (arrayref of Net::Sentinel::Actions).
 
 Returns: New instance of Sentinel
 
-=head2 start
+=item start
 
 Daemonizes the Sentinel.
 
 Returns: exit
 
-=head2 stop
+=item stop
 
 Stops the daemon.
 
 Returns: exit
 
-=head2 status
+=item status
 
 Prints the current state of the Sentinel.
 
 Returns: exit
 
-=head2 set_name( $name )
+=item set_name( $name )
 
 Sets the name of the Sentinel
 
 Returns: undef
 
-=head2 get_name
+=item get_name
 
 Gets the name of the Sentinel
 
 Returns: C<name> (scalar)
 
-=head2 set_once
+=item set_once
 
 Sets the once flag on the Sentinel. The Sentinel will only trigger once and exit on recovery.
 
 Returns: undef
 
-=head2 get_once
+=item get_once
 
 Gets the once flag
 
 Returns: C<once> (scalar)
 
-=head2 set_base_dir( $base_dir )
+=item set_base_dir( $base_dir )
 
 Sets the director from which the Sentinel will operate from
 
 Returns: undef
 
-=head2 get_base_dir
+=item get_base_dir
 
 Gets the directory where the Sentinel is operating from
 
 Returns: C<base_dir> (scalar)
 
-=head2 set_condition( \&condition )
+=item set_condition( \&condition )
 
 Sets the coderef the Sentinel will execute every iteration to check if true. If the condition is
 true the Sentinel will execute all Net::Sentinel::Actions defined.
 
 Returns: undef
 
-=head2 get_condition
+=item get_condition
 
 Gets the condition coderef to execute.
 
 Returns: C<condition> (coderef)
 
-=head2 set_condition_delay( $recovery_seconds )
+=item set_condition_delay( $recovery_seconds )
 
 Sets the delay (in seconds) the Sentinel should wait before executing the condition.
 Default is to check the condition every second
 
 Returns: undef
 
-=head2 get_condition_delay
+=item get_condition_delay
 
 Gets the congition delay seconds
 
 Returns: C<condition_delay> (scalar)
 
-=head2 set_actions( \@actions )
+=item set_actions( \@actions )
 
 Sets the Actions the Sentinel will execute when the condition is true
 
 Returns: undef
 
-=head2 get_actions
+=item get_actions
 
 Returns the Actions that Sentinel will execute when the condition is true
 
 Returns: C<actions> (arrayref)
 
-=head2 set_recovery( \@recovery_actions )
+=item set_recovery( \@recovery_actions )
 
 Sets the Actions to run on recovery when the condition returns to false
 
 Returns: undef
 
-=head2 get_recovery
+=item get_recovery
 
 Returns the Actions to run on recovery
 
 Returns: C<recovery> (arrayref)
 
-=head2 set_recovery_time( $recovery_delay )
+=item set_recovery_time( $recovery_delay )
 
 Sets the amount of time in seconds the Sentinel should wait after condition returns
 false before executing recovery actions.
 
 Returns: undef
 
-=head2 get_recovery_time
+=item get_recovery_time
 
 Gets the recovery time delay.
 
 Returns: C<recovery_time> (scalar)
 
-=head2 set_timeout( $socket_timeout )
+=item set_timeout( $socket_timeout )
 
 Sets the timeout on the UNIX socket the Sentinel uses
 
 Returns: undef
 
-=head2 get_timeout
+=item get_timeout
 
 Gets the UNIX socket timeout
 
